@@ -1,0 +1,16 @@
+services:
+  coordinator:
+    build:
+      context: ../images/coordinator
+    volumes:
+      - coordinator_db:/var/lib/postgresql/data
+    ports:
+      - "12137:5432"
+    environment:
+      - POSTGRES_PASSWORD=shardpsql
+    command:
+      - "postgres"
+      - "-c"
+      - "wal_level=logical"
+volumes:
+  coordinator_db:

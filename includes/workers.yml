@@ -1,0 +1,45 @@
+services:
+  worker1:
+    build:
+      context: ../images/worker
+    volumes:
+      - worker1_db:/var/lib/postgresql/data
+    ports:
+      - "10001:5432"
+    environment:
+      - POSTGRES_PASSWORD=shardpsql
+    command:
+      - "postgres"
+      - "-c"
+      - "wal_level=logical"
+  worker2:
+    build:
+      context: ../images/worker
+    volumes:
+      - worker2_db:/var/lib/postgresql/data
+    ports:
+      - "10002:5432"
+    environment:
+      - POSTGRES_PASSWORD=shardpsql
+    command:
+      - "postgres"
+      - "-c"
+      - "wal_level=logical"
+  worker3:
+    build:
+      context: ../images/worker
+    volumes:
+      - worker3_db:/var/lib/postgresql/data
+    ports:
+      - "10003:5432"
+    environment:
+      - POSTGRES_PASSWORD=shardpsql
+    command:
+      - "postgres"
+      - "-c"
+      - "wal_level=logical"
+
+volumes:
+  worker1_db:
+  worker2_db:
+  worker3_db:
